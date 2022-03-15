@@ -3,4 +3,4 @@ extends ../layout
 block content
     include ../mixins/articleForm
     div.content
-        +articleForm(article,'Publish','/article/add','/',null)
+        +articleForm(article,'Update',`/articles/${article.id}/edit`,`/article/${article.id}`,null)

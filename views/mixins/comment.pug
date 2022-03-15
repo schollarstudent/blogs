@@ -1,0 +1,6 @@
+mixin comment(comment)
+    div.comment
+        div.comment-header
+            div.comment-author=comment.author_name
+            div.comment-time=comment.commentedAgo
+        div.comment-body=comment.body
