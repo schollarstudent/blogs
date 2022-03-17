@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
         }
-    };
+    }
     Reply.init({
         author_name: DataTypes.STRING,
         body: DataTypes.STRING,
