@@ -16,7 +16,7 @@ module.exports.addArticle = async function(req,res){
         intro:req.body.intro,
         image_url: req.body.image_url,
         body: req.body.body,
-        author_id: 1, //todo get looged in user
+        author_id: req.user.id,
         published_on: new Date()
     });
     res.redirect('/') //todo change the redirect to view all once made
@@ -53,10 +53,19 @@ module.exports.displayAll = async function (req,res){
 
 module.exports.renderEditForm= async function (req,res){
     const article = await Article.findByPk(req.params.articleId);
+    if (!article.isOwnedBy(user)){
+        res.redirect('/');
+        return;
+    }
     res.render('articles/edot',{article});
 };
 
 module.exports.updateArticle= async function(req,res){
+    const article = await Article.findByPk(req.params.articleId);
+    if (!article.isOwnedBy(user)){
+        res.redirect('/');
+        return
+    }
     await Article.update({
         title:req.body.title,
         intro:req.body.intro,

@@ -21,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey:'article_id'
       });
     }
+    isOwnedBy(user){
+      return this.author_id === user.id
+    }
   };
   Atricle.init({
     title: DataTypes.STRING
